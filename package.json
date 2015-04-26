@@ -1,0 +1,11 @@
+{ "name": "cof",
+  "description": "circle of fifths",
+  "version": "0.0.1",
+  "devDependencies": {
+    "lodash": "3.7.0"
+  },
+  "scripts": {
+    "prestart": "tsc --outDir public/js ts/*.ts"
+  },
+  "main": "server.js"
+}
