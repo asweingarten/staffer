@@ -1,4 +1,4 @@
-import {Note} from './notes';
+import {Note} from 'tests/lib/notes';
 var test = require('tape');
 test('timing test', function (t) {
     t.plan(3);
