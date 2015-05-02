@@ -1,6 +1,6 @@
 compile:
 	cd src && flow;
-	cd src/es6 && babel -o notes.js -l flow *.es6;
+	cd src/es6 && babel -o notestests.js -l flow *.es6;
 
 test:
-	node --harmony tests/es6/bootstrap.js;
+	node --harmony tests/bootstrap.js;
