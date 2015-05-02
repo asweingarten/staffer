@@ -1,4 +1,4 @@
-import {Note} from '../../src/es6/tones';
+import {Note} from './notes';
 var test = require('tape');
 test('timing test', function (t) {
     t.plan(3);
