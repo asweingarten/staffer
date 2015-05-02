@@ -9,17 +9,18 @@ export class Note {
     name: string;
 
     constructor(number: number) {
-        this.NUM_NOTES = 12;
         this.number = number;
         this.name = notes[number];
     }
 
-    changeByHalfSteps(note: Note, steps: number): Note {
+    static getNumNotes() { return 12; }
+
+    static changeByHalfSteps(note: Note, steps: number): Note {
         if (steps > 0) {
-            return new Note((note.number + steps) % this.NUM_NOTES);
+            return new Note((note.number + steps) % this.getNumNotes());
         } else if (steps < 0) {
             return (note.number + steps < 0)
-                ? new Note(note.number + steps + this.NUM_NOTES)
+                ? new Note(note.number + steps + this.getNumNotes())
                 : new Note(note.number + steps);
         } else {
             return note;
@@ -27,11 +28,19 @@ export class Note {
     }
 
     upHalfStep(): Note {
-        return this.changeByHalfSteps(this, 1);
+        return Note.changeByHalfSteps(this, 1);
+    }
+
+    upWholeStep(): Note {
+        return Note.changeByHalfSteps(this, 2);
     }
 
     downHalfStep(): Note {
-        return this.changeByHalfSteps(this, -1);
+        return Note.changeByHalfSteps(this, -1);
+    }
+
+    downWholeStep(): Note {
+        return Note.changeByHalfSteps(this, -2);
     }
 }
 
