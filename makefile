@@ -1,5 +1,6 @@
 compile:
-	cd src/es6 && babel *.js --out-dir ../cd es5/;
+	cd src/es6 && babel *.js --out-dir ../es5/;
+	cd tests/es6 && babel *.js --out-dir ../es5/ --modules common;
 
 test:
-	node tests/test.js;
+	node --harmony tests/es6/bootstrap.js;
