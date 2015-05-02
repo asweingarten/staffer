@@ -1,4 +1,4 @@
-// bootstrap.js file
+/* @flow */
 
 var System = require('es6-module-loader').System;
 
