@@ -1,9 +1,9 @@
-import {Scale} from './dist/scales';
+import {ScaleConstructor, Scale} from './dist/scales';
 
 module.exports = function(app) {
 
 	app.get('/c-major', function(req, res){
-		cMajorScale = new Scale
-		res.json();
+		var cMajorScale = ScaleConstructor.C_MAJOR();
+		res.json(cMajorScale);
 	});
 }
