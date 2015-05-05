@@ -12,6 +12,10 @@ export var ScaleConstructor = {
 			notes[i] = Note.changeByHalfSteps(notes[i - 1], scaleSteps[i]);
 		}
 		return new Scale(notes);
+	},
+
+	C_MAJOR() {
+		return this.majorScale(Note.C_NATURAL());
 	}
 }
 
