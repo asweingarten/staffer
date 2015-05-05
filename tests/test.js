@@ -1,5 +1,5 @@
-import {Note} from 'tests/lib/notes';
-import {Scale} from 'tests/lib/scales';
+import {Note} from 'dist/notes';
+import {Scale} from 'dist/scales';
 var test = require('tape');
 
 test('note stepping tests', function (t) {
