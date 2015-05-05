@@ -13,7 +13,20 @@ export class Note {
         this.name = notes[number];
     }
 
-    static getNumNotes() { return 12; }
+    static getNumNotes(): number { return 12; }
+
+    static C_NATURAL(): Note { return new Note(0); }
+    static C_SHARP(): Note { return new Note(1); }
+    static D_NATURAL(): Note { return new Note(2); }
+    static D_SHARP(): Note { return new Note(3); }
+    static E_NATURAL(): Note { return new Note(4); }
+    static F_NATURAL(): Note { return new Note(5); }
+    static F_SHARP(): Note { return new Note(6); }
+    static G_NATURAL(): Note { return new Note(7); }
+    static G_SHARP(): Note { return new Note(8); }
+    static A_NATURAL(): Note { return new Note(9); }
+    static A_SHARP(): Note { return new Note(10); }
+    static B_NATURAL(): Note { return new Note(11); }
 
     static changeByHalfSteps(note: Note, steps: number): Note {
         if (steps > 0) {

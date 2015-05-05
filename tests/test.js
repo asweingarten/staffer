@@ -1,5 +1,5 @@
 import {Note} from 'dist/notes';
-import {Scale} from 'dist/scales';
+import {Scale, ScaleConstructor} from 'dist/scales';
 var test = require('tape');
 
 test('note stepping tests', function (t) {
@@ -28,9 +28,9 @@ test('C Major scale construction', function(t) {
 		G_NATURAL = F_NATURAL.upWholeStep(),
 		A_NATURAL = G_NATURAL.upWholeStep(),
 		B_NATURAL = A_NATURAL.upWholeStep(),
-		C_MAJOR_SCALE = new Scale(C_NATURAL, 'MAJOR');
+		C_MAJOR_SCALE = ScaleConstructor.majorScale(C_NATURAL);
 
-	t.deepEqual(C_MAJOR_SCALE.notes[0], C_NATURAL);
+	t.deepEqual(C_MAJOR_SCALE.root(), C_NATURAL);
 	t.deepEqual(C_MAJOR_SCALE.notes[1], D_NATURAL);
 	t.deepEqual(C_MAJOR_SCALE.notes[2], E_NATURAL);
 	t.deepEqual(C_MAJOR_SCALE.notes[3], F_NATURAL);
