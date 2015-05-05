@@ -10,6 +10,7 @@
   },
   "main": "server.js",
   "dependencies": {
-    "es6-module-loader": "^0.16.6"
+    "es6-module-loader": "^0.16.6",
+    "express": "4.12.3"
   }
 }
