@@ -1,6 +1,5 @@
 var express = require('express'),
-		app = express(),
-		cof = require('cof');
+		app = express();
 
 app.use(express.static(__dirname + '/public'));
 
