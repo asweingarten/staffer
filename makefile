@@ -5,3 +5,6 @@ compile:
 test:
 	make compile;
 	node --harmony tests/bootstrap.js;
+
+server:
+	babel-node server;
