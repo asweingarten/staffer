@@ -1,7 +1,7 @@
 import {Note} from 'dist/notes';
 import {Scale, ScaleConstructor} from 'dist/scales';
 var test = require('tape'),
-	C_NATURAL = new Note(0),
+	C_NATURAL = new Note(0, 'MID'),
 	D_NATURAL = C_NATURAL.upWholeStep(),
 	E_NATURAL = D_NATURAL.upWholeStep(),
 	F_NATURAL = E_NATURAL.upHalfStep(),
@@ -12,15 +12,19 @@ var test = require('tape'),
 test('note stepping tests', function (t) {
     t.plan(5);
 
-    t.deepEqual(C_NATURAL, new Note(0));
+    t.deepEqual(C_NATURAL, new Note(0, 'MID'));
 
-    t.deepEqual(C_NATURAL.upHalfStep(), new Note(1));
+    t.deepEqual(C_NATURAL.upHalfStep(), new Note(1, 'MID'));
 
-    t.deepEqual(C_NATURAL.upWholeStep(), new Note(2));
+    t.deepEqual(C_NATURAL.upWholeStep(), new Note(2, 'MID'));
 
-    t.deepEqual(C_NATURAL.downHalfStep(), new Note(11));
+    t.deepEqual(C_NATURAL.downHalfStep(), new Note(11, 'LOW'));
 
-    t.deepEqual(C_NATURAL.downWholeStep(), new Note(10));
+    t.deepEqual(C_NATURAL.downWholeStep(), new Note(10, 'LOW'));
+});
+
+test('Note position changes', function(t) {
+
 });
 
 test('C Major scale construction', function(t) {
@@ -34,7 +38,7 @@ test('C Major scale construction', function(t) {
 	t.deepEqual(C_MAJOR_SCALE.notes[4], G_NATURAL);
 	t.deepEqual(C_MAJOR_SCALE.notes[5], A_NATURAL);
 	t.deepEqual(C_MAJOR_SCALE.notes[6], B_NATURAL);
-	t.deepEqual(C_MAJOR_SCALE.notes[7], C_NATURAL);
+	t.deepEqual(C_MAJOR_SCALE.notes[7], new Note(0, 'HIGH'));
 });
 
 test('C Major scale convenience function', function(t) {
@@ -49,5 +53,5 @@ test('C Major scale convenience function', function(t) {
 	t.deepEqual(C_MAJOR_SCALE.notes[4], G_NATURAL);
 	t.deepEqual(C_MAJOR_SCALE.notes[5], A_NATURAL);
 	t.deepEqual(C_MAJOR_SCALE.notes[6], B_NATURAL);
-	t.deepEqual(C_MAJOR_SCALE.notes[7], C_NATURAL);
+	t.deepEqual(C_MAJOR_SCALE.notes[7], new Note(0, 'HIGH'));
 });
