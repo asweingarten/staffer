@@ -1,17 +1,16 @@
 /* @flow */ 
 
 var notes: Array<string> = ['C_NATURAL', 'C_SHARP', 'D_NATURAL', 'D_SHARP', 'E_NATURAL', 'F_NATURAL', 'F_SHARP', 'G_NATURAL', 'G_SHARP', 'A_NATURAL', 'A_SHARP', 'B_NATURAL'];
-        
 
-export class Note {
+class Note {
 
     NUM_NOTES: number;
     number: number;
     name: string;
-    position: string;
+    position: number;
 
     constructor(number: number, position: string) {
-        if (position !== 'HIGH' && position !== 'MID' && position !== 'LOW') throw "UNSUPPORTED NOTE POSITION";
+        if (position !== Note.Position.HIGH && position !== Note.Position.MID && position !== Note.Position.LOW) throw "UNSUPPORTED NOTE POSITION";
 
         this.position = position;
         this.number = number;
@@ -20,18 +19,18 @@ export class Note {
 
     static getNumNotes(): number { return 12; }
 
-    static C_NATURAL(): Note { return new Note(0, 'MID'); }
-    static C_SHARP(): Note { return new Note(1, 'MID'); }
-    static D_NATURAL(): Note { return new Note(2, 'MID'); }
-    static D_SHARP(): Note { return new Note(3, 'MID'); }
-    static E_NATURAL(): Note { return new Note(4, 'MID'); }
-    static F_NATURAL(): Note { return new Note(5, 'MID'); }
-    static F_SHARP(): Note { return new Note(6, 'MID'); }
-    static G_NATURAL(): Note { return new Note(7, 'MID'); }
-    static G_SHARP(): Note { return new Note(8, 'MID'); }
-    static A_NATURAL(): Note { return new Note(9, 'MID'); }
-    static A_SHARP(): Note { return new Note(10, 'MID'); }
-    static B_NATURAL(): Note { return new Note(11, 'MID'); }
+    static C_NATURAL(): Note { return new Note(0, Note.Position.MID); }
+    static C_SHARP(): Note { return new Note(1, Note.Position.MID); }
+    static D_NATURAL(): Note { return new Note(2, Note.Position.MID); }
+    static D_SHARP(): Note { return new Note(3, Note.Position.MID); }
+    static E_NATURAL(): Note { return new Note(4, Note.Position.MID); }
+    static F_NATURAL(): Note { return new Note(5, Note.Position.MID); }
+    static F_SHARP(): Note { return new Note(6, Note.Position.MID); }
+    static G_NATURAL(): Note { return new Note(7, Note.Position.MID); }
+    static G_SHARP(): Note { return new Note(8, Note.Position.MID); }
+    static A_NATURAL(): Note { return new Note(9, Note.Position.MID); }
+    static A_SHARP(): Note { return new Note(10, Note.Position.MID); }
+    static B_NATURAL(): Note { return new Note(11, Note.Position.MID); }
 
     static changeByHalfSteps(note: Note, steps: number): Note {
         if (steps > 0) {
@@ -68,18 +67,26 @@ export class Note {
 
     static lowerPosition(position: string): string {
         switch(position) {
-            case 'HIGH': return 'MID';
-            case 'MID': return 'LOW';
-            case 'LOW': return 'OUT_OF_RANGE';
+            case Note.Position.HIGH: return Note.Position.MID;
+            case Note.Position.MID: return Note.Position.LOW;
+            case Note.Position.LOW: return Note.Position.OUT_OF_RANGE;
         }
     }
 
     static raisePosition(position: string): string {
         switch(position) {
-            case 'HIGH': return 'OUT_OF_RANGE';
-            case 'MID': return 'HIGH';
-            case 'LOW': return 'MID';
+            case Note.Position.HIGH: return Note.Position.OUT_OF_RANGE;
+            case Note.Position.MID: return Note.Position.HIGH;
+            case Note.Position.LOW: return Note.Position.MID;
         }
     }
 }
 
+Note.Position = {
+    LOW: 0,
+    MID: 1,
+    HIGH: 2,
+    OUT_OF_RANGE: 3
+};
+
+export {Note};
