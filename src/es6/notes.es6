@@ -35,14 +35,14 @@ class Note {
     static changeByHalfSteps(note: Note, steps: number): Note {
         if (steps > 0) {
             if (note.number + steps >= this.getNumNotes()) {
-                return new Note((note.number + steps) % this.getNumNotes(), this.raisePosition(note.position));
+                return Note.raisePosition(new Note((note.number + steps) % this.getNumNotes(), note.position));
             } else {
                 return new Note(note.number + steps, note.position);
             }
             return new Note((note.number + steps) % this.getNumNotes());
         } else if (steps < 0) {
             return (note.number + steps < 0)
-                ? new Note(note.number + steps + this.getNumNotes(), this.lowerPosition(note.position))
+                ? Note.lowerPosition(new Note(note.number + steps + this.getNumNotes(), note.position))
                 : new Note(note.number + steps, note.position);
         } else {
             return note;
@@ -65,19 +65,26 @@ class Note {
         return Note.changeByHalfSteps(this, -2);
     }
 
-    static lowerPosition(position: string): string {
-        switch(position) {
-            case Note.Position.HIGH: return Note.Position.MID;
-            case Note.Position.MID: return Note.Position.LOW;
-            case Note.Position.LOW: return Note.Position.OUT_OF_RANGE;
+    static lowerPosition(note: Note): Note {
+        switch(note.position) {
+            case Note.Position.HIGH: 
+                return new Note(note.number, Note.Position.MID);
+            case Note.Position.MID: 
+                return new Note(note.number, Note.Position.LOW);
+            case Note.Position.LOW: 
+                return new Note(note.number, Note.Position.OUT_OF_RANGE);
         }
+
     }
 
-    static raisePosition(position: string): string {
-        switch(position) {
-            case Note.Position.HIGH: return Note.Position.OUT_OF_RANGE;
-            case Note.Position.MID: return Note.Position.HIGH;
-            case Note.Position.LOW: return Note.Position.MID;
+    static raisePosition(note: Note): Note {
+        switch(note.position) {
+            case Note.Position.HIGH: 
+                return new Note(note.number, Note.Position.OUT_OF_RANGE);
+            case Note.Position.MID: 
+                return new Note(note.number, Note.Position.HIGH);
+            case Note.Position.LOW: 
+                return new Note(note.number, Note.Position.MID);
         }
     }
 }
