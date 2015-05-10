@@ -1,4 +1,4 @@
 **/.flowconfig
 node_modules
 public/bower_components/**
-dist/**
+typings/**
