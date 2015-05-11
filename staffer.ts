@@ -1,4 +1,4 @@
-import {COF, Accidentals} from 'js/music';
+import {COF, Accidental} from 'js/music';
 
 export var Staffer = {
     notes: null,
@@ -8,7 +8,7 @@ export var Staffer = {
     noteCount: 0,
     canvas: null,
     keySignatureOffsets: {
-        [Accidentals.SHARP]: {
+        [Accidental.SHARP]: {
             F: 7,
             G: 6,
             A: 12,
@@ -17,7 +17,7 @@ export var Staffer = {
             D: 9,
             E: 8,
         },
-        [Accidentals.FLAT]: {
+        [Accidental.FLAT]: {
             F: 7,
             G: 13,
             A: 12,
@@ -73,13 +73,13 @@ export var Staffer = {
                 console.log('printing note: ' + COF[this.key.order][i]);
                 var note = COF[this.key.order][i];
                 switch (this.key[note]) {
-                    case Accidentals.NATURAL:
+                    case Accidental.NATURAL:
                         draw = '';
                         break;
-                    case Accidentals.SHARP:
+                    case Accidental.SHARP:
                         draw = sharp;
                         break;
-                    case Accidentals.FLAT:
+                    case Accidental.FLAT:
                         draw = flat;
                         break;
                 }
