@@ -1,13 +1,16 @@
 /// <reference path="typings/angular2/angular2.d.ts" />
+/// <reference path="typings/fabricjs/fabricjs.d.ts" />
 
 import {Component, View, bootstrap, For, If} from 'angular2/angular2';
 
-import {Staffer} from 'js/staffer';
+/// ts:import=staffer,Staffer
+import Staffer = require('./staffer'); ///ts:import:generated
 
 // Annotation section
 @Component({
   selector: 'my-app'
 })
+
 @View({
   directives: [For, If],
   templateUrl: 'templates/app.html',

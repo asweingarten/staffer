@@ -1,10 +1,10 @@
-export enum Accidental {
-    NATURAL,
-    SHARP,
-    FLAT
+enum Accidental {
+        NATURAL,
+        SHARP,
+        FLAT
 };
 
-export var COF = {
+var COF = {
         [Accidental.SHARP]: ['F', 'C', 'G', 'D', 'A', 'E', 'B'],
         [Accidental.FLAT]: ['B', 'E', 'A', 'D', 'G', 'C', 'F'],
         C: {
@@ -139,7 +139,39 @@ export var COF = {
         },
     };
 
-export class Note {
-
+var Music = {
+    Accidental: Accidental,
+    COF: COF
 }
+export = Music;
+
+// export enum NoteName {
+//     C,
+//     D,
+//     E,
+//     F,
+//     G,
+//     A,
+//     B,
+// };
+
+// class Note {
+//     name: NoteName;
+//     octave: number;
+//     accidental: Accidental;
+
+//     constructor(name: NoteName, octave: number, accidental: Accidental) {
+//         this.name = name;
+//         this.octave = octave;
+//         this.accidental = accidental;
+//     }
+
+//     noteName(): string {
+//         return name;
+//     }
+
+//     toString(): string {
+//         return `${this.noteName()}${this.octave}`;
+//     }
+// }
 

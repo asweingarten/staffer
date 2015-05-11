@@ -1,6 +1,8 @@
-import {COF, Accidental} from 'js/music';
+/// ts:import=music,Music
+import Music = require('./music'); ///ts:import:generated
+/// <reference path="typings/fabricjs/fabricjs.d.ts" />
 
-export var Staffer = {
+var Staffer = {
     notes: null,
     key: null,
     lines: [],
@@ -8,7 +10,7 @@ export var Staffer = {
     noteCount: 0,
     canvas: null,
     keySignatureOffsets: {
-        [Accidental.SHARP]: {
+        [Music.Accidental.SHARP]: {
             F: 7,
             G: 6,
             A: 12,
@@ -17,7 +19,7 @@ export var Staffer = {
             D: 9,
             E: 8,
         },
-        [Accidental.FLAT]: {
+        [Music.Accidental.FLAT]: {
             F: 7,
             G: 13,
             A: 12,
@@ -32,7 +34,7 @@ export var Staffer = {
     init(canvas, notes, key) {
         this.canvas = canvas;
         this.notes = notes || null;
-        this.key = key || COF.C;
+        this.key = key || Music.COF.C;
         this.canvas.setDimensions({ width: 900, height: 400 });
 
         this.lineHeight = this.canvas.getHeight() / 20;
@@ -46,7 +48,7 @@ export var Staffer = {
     },
 
     setKey(key: string) {
-        this.key = COF[key];
+        this.key = Music.COF[key];
         this.draw();
     },
 
@@ -69,17 +71,17 @@ export var Staffer = {
                 flat = '\u266D',
                 draw;
 
-            for (var i = 0; i < COF[this.key.order].length; i++) {
-                console.log('printing note: ' + COF[this.key.order][i]);
-                var note = COF[this.key.order][i];
+            for (var i = 0; i < Music.COF[this.key.order].length; i++) {
+                console.log('printing note: ' + Music.COF[this.key.order][i]);
+                var note = Music.COF[this.key.order][i];
                 switch (this.key[note]) {
-                    case Accidental.NATURAL:
+                    case Music.Accidental.NATURAL:
                         draw = '';
                         break;
-                    case Accidental.SHARP:
+                    case Music.Accidental.SHARP:
                         draw = sharp;
                         break;
-                    case Accidental.FLAT:
+                    case Music.Accidental.FLAT:
                         draw = flat;
                         break;
                 }
@@ -107,3 +109,5 @@ export var Staffer = {
     }
 
 };
+
+export = Staffer;
