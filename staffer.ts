@@ -1,4 +1,4 @@
-import {COF, Accidentals} from 'music';
+import {COF, Accidentals} from 'js/music';
 
 export var Staffer = {
     notes: null,
@@ -7,6 +7,27 @@ export var Staffer = {
     lineHeight: 0,
     noteCount: 0,
     canvas: null,
+    keySignatureOffsets: {
+        [Accidentals.SHARP]: {
+            F: 7,
+            G: 6,
+            A: 12,
+            B: 11,
+            C: 10,
+            D: 9,
+            E: 8,
+        },
+        [Accidentals.FLAT]: {
+            F: 7,
+            G: 13,
+            A: 12,
+            B: 11,
+            C: 10,
+            D: 9,
+            E: 8,
+            // OCTAVE: 7
+        }
+    },
 
     init(canvas, notes, key) {
         this.canvas = canvas;
@@ -44,17 +65,6 @@ export var Staffer = {
             this.canvas.add(this.lines[i]);
         }
 
-
-        var offsets = {
-            F: 7,
-            G: 6,
-            A: 12,
-            B: 11,
-            C: 10,
-            D: 9,
-            E: 8,
-            OCTAVE: 7
-        }
         if (this.key !== null) {
             console.log('key not null');
             var sharp = '\u266F',
@@ -78,7 +88,7 @@ export var Staffer = {
                 let noteWidth = 30;
                 let gutter = 20;
                 this.canvas.add(new fabric.Text(draw, {
-                    left: noteWidth * i + gutter, top: (this.lineHeight / 2) * (offsets[note]) - 13,
+                    left: noteWidth * i + gutter, top: (this.lineHeight / 2) * (this.keySignatureOffsets[this.key.order][note]) - 13,
                     width: noteWidth, height: 30,
                 }));
             }

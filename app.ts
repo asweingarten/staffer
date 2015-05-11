@@ -2,7 +2,7 @@
 
 import {Component, View, bootstrap, For, If} from 'angular2/angular2';
 
-import {Staffer} from 'staffer';
+import {Staffer} from 'js/staffer';
 
 // Annotation section
 @Component({
