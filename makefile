@@ -1,6 +1,5 @@
 compile:
-	cd src && flow;
-	cd src/es6 && babel --no-comments -d ../../dist -l flow *.es6;
+	tsc --watch -m commonjs -t es5 --emitDecoratorMetadata --outDir js  *.ts;
 
 test:
 	make compile;
