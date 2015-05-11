@@ -47,13 +47,11 @@ export var Staffer = {
 
     setKey(key: string) {
         this.key = COF[key];
-        this.canvas.clear();
-        this.init(this.canvas, null, this.key);
         this.draw();
     },
 
     draw() {
-
+        this.canvas.clear();
         this.canvas.add(new fabric.Rect({
             width: this.canvas.getWidth(),
             height: this.canvas.getHeight(),
