@@ -139,39 +139,52 @@ var COF = {
         },
     };
 
+enum NoteName {
+    C,
+    D,
+    E,
+    F,
+    G,
+    A,
+    B,
+};
+
+class Note {
+    name: NoteName;
+    octave: number;
+    accidental: Accidental;
+
+    constructor(name: NoteName, octave: number, accidental: Accidental) {
+        this.name = name;
+        if (octave < 0 || octave > 9) throw "Octave Out of Range";
+        this.octave = octave;
+        this.accidental = accidental;
+    }
+
+    noteName(): string {
+        return name;
+    }
+
+    accidentalToString(): string {
+        switch (this.accidental) {
+            case Music.Accidental.NATURAL:
+                return '\u266E';
+            case Music.Accidental.SHARP:
+                return '\u266F';
+            case Music.Accidental.FLAT:
+                return '\u266d';
+        }
+    }
+
+    toString(): string {
+        return `${this.noteName()}${this.octave}${this.accidentalToString}`;
+    }
+}
+
 var Music = {
     Accidental: Accidental,
-    COF: COF
+    COF: COF,
+    Note: Note
 }
 export = Music;
-
-// export enum NoteName {
-//     C,
-//     D,
-//     E,
-//     F,
-//     G,
-//     A,
-//     B,
-// };
-
-// class Note {
-//     name: NoteName;
-//     octave: number;
-//     accidental: Accidental;
-
-//     constructor(name: NoteName, octave: number, accidental: Accidental) {
-//         this.name = name;
-//         this.octave = octave;
-//         this.accidental = accidental;
-//     }
-
-//     noteName(): string {
-//         return name;
-//     }
-
-//     toString(): string {
-//         return `${this.noteName()}${this.octave}`;
-//     }
-// }
 

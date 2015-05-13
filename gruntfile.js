@@ -10,8 +10,8 @@ module.exports = function(grunt) {
 				
 				
 			},
-			src: ["./*.ts", "!node_modules/**/*.ts", "!ts-1.5.0beta/**/*.ts"],
-			outDir: 'js',
+			src: ["src/*.ts", "!node_modules/**/*.ts", "!ts-1.5.0beta/**/*.ts"],
+			outDir: 'dist',
 		}
     }
   });

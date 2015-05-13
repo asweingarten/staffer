@@ -1,5 +1,5 @@
-/// <reference path="typings/angular2/angular2.d.ts" />
-/// <reference path="typings/fabricjs/fabricjs.d.ts" />
+/// <reference path="../typings/angular2/angular2.d.ts" />
+/// <reference path="../typings/fabricjs/fabricjs.d.ts" />
 
 import {Component, View, bootstrap, For, If} from 'angular2/angular2';
 
