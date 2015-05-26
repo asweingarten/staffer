@@ -150,7 +150,7 @@ enum NoteName {
 };
 
 class Note {
-    name: NoteName;
+    name: any;
     octave: number;
     accidental: Accidental;
 
@@ -162,7 +162,7 @@ class Note {
     }
 
     noteName(): string {
-        return name;
+        return NoteName[this.name];
     }
 
     accidentalToString(): string {
@@ -177,14 +177,15 @@ class Note {
     }
 
     toString(): string {
-        return `${this.noteName()}${this.octave}${this.accidentalToString}`;
+        return `${this.noteName()}${this.octave}${this.accidentalToString()}`;
     }
 }
 
 var Music = {
     Accidental: Accidental,
     COF: COF,
-    Note: Note
+    Note: Note,
+    NoteName: NoteName
 }
 export = Music;
 

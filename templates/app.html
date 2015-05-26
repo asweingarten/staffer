@@ -1,11 +1,5 @@
 <div style="height: 50px;">
-	<div style="float: left;d" *for="#key of keys">
-		<button (click)="setKey(key)">{{key}}</button>
+	<div style="float: left;" *for="#key of staff.keySignatures">
+		<button (click)="setKey(key.noteName())">{{key}}</button>
 	</div>
 </div>
-<!-- <select id="staffer" name="" id="key-chooser">
-	<template *for="#key of keys">
-		<option value="{{key}}">{{key}}</option>
-	</template>
-	<option *for="#key of keys" value="{{key}}" *if="key == activeKey" selected><div (click)="setKey(key)">{{key}}</div></option>
-</select> -->

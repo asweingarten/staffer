@@ -28,7 +28,6 @@ class StafferApp {
     this.staff.init(new fabric.Canvas('staff'), null, null);
     this.staff.draw();
     this.name = 'Alice';
-    this.keys = ['C', 'F', 'B_FLAT', 'E_FLAT', 'A_FLAT', 'D_FLAT', 'G_FLAT', 'F_SHARP', 'B', 'E', 'A', 'D', 'G'];
     this.activeKey = 'C';
   }
 

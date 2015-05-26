@@ -1,5 +1,6 @@
 /// ts:import=music,Music
 import Music = require('./music'); ///ts:import:generated
+var Note = Music.Note;
 /// <reference path="../typings/fabricjs/fabricjs.d.ts" />
 
 var Staffer = {
@@ -9,6 +10,21 @@ var Staffer = {
     lineHeight: 0,
     noteCount: 0,
     canvas: null,
+    keySignatures: [
+        new Note(Music.NoteName.C, 5, Music.Accidental.NATURAL),
+        new Note(Music.NoteName.F, 5, Music.Accidental.NATURAL),
+        new Note(Music.NoteName.B, 5, Music.Accidental.FLAT),
+        new Note(Music.NoteName.E, 5, Music.Accidental.FLAT),
+        new Note(Music.NoteName.A, 5, Music.Accidental.FLAT),
+        new Note(Music.NoteName.D, 5, Music.Accidental.FLAT),
+        new Note(Music.NoteName.G, 5, Music.Accidental.FLAT),
+        new Note(Music.NoteName.F, 5, Music.Accidental.SHARP),
+        new Note(Music.NoteName.B, 5, Music.Accidental.NATURAL),
+        new Note(Music.NoteName.E, 5, Music.Accidental.NATURAL),
+        new Note(Music.NoteName.A, 5, Music.Accidental.NATURAL),
+        new Note(Music.NoteName.D, 5, Music.Accidental.NATURAL),
+        new Note(Music.NoteName.G, 5, Music.Accidental.NATURAL)
+    ],
     keySignatureOffsets: {
         [Music.Accidental.SHARP]: {
             F: 7,
@@ -27,8 +43,8 @@ var Staffer = {
             C: 10,
             D: 9,
             E: 8,
-            // OCTAVE: 7
-        }
+        },
+        OCTAVE: 7
     },
 
     init(canvas, notes, key) {

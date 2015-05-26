@@ -1,8 +1,7 @@
-**/.flowconfig
-node_modules
-public/bower_components/**
+node_modules/**
+dist/**
+bower_components/**
 typings/**
-js/**
 .DS_Store
 .baseDir.ts
 .tscache/**
