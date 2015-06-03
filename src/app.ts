@@ -6,6 +6,10 @@ import {Component, View, bootstrap, For, If} from 'angular2/angular2';
 /// ts:import=staffer,Staffer
 import Staffer = require('./staffer'); ///ts:import:generated
 
+/// ts:import=music,Music
+import Music = require('./music'); ///ts:import:generated
+
+
 // Annotation section
 @Component({
   selector: 'my-app'
@@ -27,8 +31,7 @@ class StafferApp {
     this.staff = Staffer;
     this.staff.init(new fabric.Canvas('staff'), null, null);
     this.staff.draw();
-    this.name = 'Alice';
-    this.activeKey = 'C';
+    this.staff.setKey(Music.Note.C());
   }
 
   setKey(key: string) {

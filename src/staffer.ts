@@ -11,19 +11,19 @@ var Staffer = {
     noteCount: 0,
     canvas: null,
     keySignatures: [
-        new Note(Music.NoteName.C, 5, Music.Accidental.NATURAL),
-        new Note(Music.NoteName.F, 5, Music.Accidental.NATURAL),
-        new Note(Music.NoteName.B, 5, Music.Accidental.FLAT),
-        new Note(Music.NoteName.E, 5, Music.Accidental.FLAT),
-        new Note(Music.NoteName.A, 5, Music.Accidental.FLAT),
-        new Note(Music.NoteName.D, 5, Music.Accidental.FLAT),
-        new Note(Music.NoteName.G, 5, Music.Accidental.FLAT),
-        new Note(Music.NoteName.F, 5, Music.Accidental.SHARP),
-        new Note(Music.NoteName.B, 5, Music.Accidental.NATURAL),
-        new Note(Music.NoteName.E, 5, Music.Accidental.NATURAL),
-        new Note(Music.NoteName.A, 5, Music.Accidental.NATURAL),
-        new Note(Music.NoteName.D, 5, Music.Accidental.NATURAL),
-        new Note(Music.NoteName.G, 5, Music.Accidental.NATURAL)
+        Note.C(5, Music.Accidental.NATURAL),
+        Note.F(5, Music.Accidental.NATURAL),
+        Note.B(5, Music.Accidental.FLAT),
+        Note.E(5, Music.Accidental.FLAT),
+        Note.A(5, Music.Accidental.FLAT),
+        Note.D(5, Music.Accidental.FLAT),
+        Note.G(5, Music.Accidental.FLAT),
+        Note.F(5, Music.Accidental.SHARP),
+        Note.B(5, Music.Accidental.NATURAL),
+        Note.E(5, Music.Accidental.NATURAL),
+        Note.A(5, Music.Accidental.NATURAL),
+        Note.D(5, Music.Accidental.NATURAL),
+        Note.G(5, Music.Accidental.NATURAL)
     ],
     keySignatureOffsets: {
         [Music.Accidental.SHARP]: {
@@ -63,9 +63,54 @@ var Staffer = {
         }
     },
 
-    setKey(key: string) {
-        this.key = Music.COF[key];
+    setKey(note: any) {
+        this.key = Music.COF[note.noteName()];
         this.draw();
+    },
+
+    drawKeySignature() {
+        if (this.key !== null) {
+            const SHARP_SIGN = '\u266F',
+                  FLAT_SIGN = '\u266D';
+            let draw = '';
+
+            for (var i = 0; i < Music.COF[this.key.order].length; i++) {
+                console.log('printing note: ' + Music.COF[this.key.order][i]);
+                var note = Music.COF[this.key.order][i];
+                switch (this.key[note]) {
+                    case Music.Accidental.NATURAL:
+                        draw = '';
+                        break;
+                    case Music.Accidental.SHARP:
+                        draw = SHARP_SIGN;
+                        break;
+                    case Music.Accidental.FLAT:
+                        draw = FLAT_SIGN;
+                        break;
+                }
+                let noteWidth = 30;
+                let gutter = 20;
+                this.canvas.add(new fabric.Text(draw, {
+                    left: noteWidth * i + gutter, top: (this.lineHeight / 2) * (this.keySignatureOffsets[this.key.order][note]) - 13,
+                    width: noteWidth, height: 30,
+                }));
+            }
+        }
+    },
+
+    drawNotes() {
+        if (this.notes !== null) {
+
+            for(var i = 0; i < this.notes.length; i++) {
+                let noteWidth = this.canvas.getWidth()/this.notes.length/2;
+                let gutter = 20;
+                let note = this.notes[i];
+                let noteHeight = note.position;
+                // this.canvas.add(new fabric.Ellipse({rx: noteWidth/2, ry: this.lineHeight/2,
+                //                                     left: noteWidth*i+gutter, top: 100,
+                //                                     fill: 'black'}));
+            }
+        }
     },
 
     draw() {
@@ -81,47 +126,8 @@ var Staffer = {
             this.canvas.add(this.lines[i]);
         }
 
-        if (this.key !== null) {
-            console.log('key not null');
-            var sharp = '\u266F',
-                flat = '\u266D',
-                draw;
+        this.drawKeySignature();
 
-            for (var i = 0; i < Music.COF[this.key.order].length; i++) {
-                console.log('printing note: ' + Music.COF[this.key.order][i]);
-                var note = Music.COF[this.key.order][i];
-                switch (this.key[note]) {
-                    case Music.Accidental.NATURAL:
-                        draw = '';
-                        break;
-                    case Music.Accidental.SHARP:
-                        draw = sharp;
-                        break;
-                    case Music.Accidental.FLAT:
-                        draw = flat;
-                        break;
-                }
-                let noteWidth = 30;
-                let gutter = 20;
-                this.canvas.add(new fabric.Text(draw, {
-                    left: noteWidth * i + gutter, top: (this.lineHeight / 2) * (this.keySignatureOffsets[this.key.order][note]) - 13,
-                    width: noteWidth, height: 30,
-                }));
-            }
-        }
-
-        // if (this.notes !== null) {
-
-        //     for(var i = 0; i < this.notes.length; i++) {
-        //         let noteWidth = this.canvas.getWidth()/this.notes.length/2;
-        //         let gutter = 20;
-        //         let note = this.notes[i];
-        //         let noteHeight = note.position;
-        //         this.canvas.add(new fabric.Ellipse({rx: noteWidth/2, ry: this.lineHeight/2,
-        //                                                                                 left: noteWidth*i+gutter, top: 100,
-        //                                                                                 fill: 'black'}));
-        //     }
-        // }
     }
 
 };
