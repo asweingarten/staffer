@@ -8,6 +8,8 @@ import Staffer = require('./staffer'); ///ts:import:generated
 
 /// ts:import=music,Music
 import Music = require('./music'); ///ts:import:generated
+/// ts:import=cof,COF
+import COF = require('./cof'); ///ts:import:generated
 
 
 // Annotation section
@@ -29,7 +31,7 @@ class StafferApp {
   
   constructor() {
     this.staff = Staffer;
-    this.staff.key = Music.COF[Music.Note.C().noteName()];
+    this.staff.key = COF[Music.Note.C().noteName()];
     this.staff.init(new fabric.Canvas('staff'), null, null);
     this.staff.draw();
   }

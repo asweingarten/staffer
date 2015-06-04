@@ -1,5 +1,7 @@
 /// ts:import=music,Music
 import Music = require('./music'); ///ts:import:generated
+/// ts:import=cof,COF
+import COF = require('./cof'); ///ts:import:generated
 var Note = Music.Note;
 var NoteName = Music.NoteName;
 /// <reference path="../typings/fabricjs/fabricjs.d.ts" />
@@ -65,7 +67,7 @@ var Staffer = {
     },
 
     setKey(note: any) {
-        this.key = Music.COF[note.nameAndAccidental()];
+        this.key = COF[note.nameAndAccidental()];
         this.draw();
     },
 
@@ -75,8 +77,8 @@ var Staffer = {
                   FLAT_SIGN = '\u266D';
             let draw = ''; 
 
-            for (var i = 0; i < Music.COF[this.key.order].length; i++) {
-                var note = Music.COF[this.key.order][i];
+            for (var i = 0; i < COF[this.key.order].length; i++) {
+                var note = COF[this.key.order][i];
                 switch (this.key[note.noteName()]) {
                     case Music.Accidental.NATURAL:
                         draw = '';
