@@ -4,141 +4,6 @@ enum Accidental {
         FLAT
 };
 
-var COF = {
-        [Accidental.SHARP]: ['F', 'C', 'G', 'D', 'A', 'E', 'B'],
-        [Accidental.FLAT]: ['B', 'E', 'A', 'D', 'G', 'C', 'F'],
-        C: {
-            order: Accidental.SHARP,
-            C: Accidental.NATURAL,
-            D: Accidental.NATURAL,
-            E: Accidental.NATURAL,
-            F: Accidental.NATURAL,
-            G: Accidental.NATURAL, 
-            A: Accidental.NATURAL,
-            B: Accidental.NATURAL,
-        },
-        F: {
-            order: Accidental.FLAT,
-            F: Accidental.NATURAL,
-            G: Accidental.NATURAL,
-            A: Accidental.NATURAL,
-            B: Accidental.FLAT,
-            C: Accidental.NATURAL,
-            D: Accidental.NATURAL,
-            E: Accidental.NATURAL,
-        },
-        B_FLAT: {
-            order: Accidental.FLAT,
-            B: Accidental.FLAT,
-            C: Accidental.NATURAL,
-            D: Accidental.NATURAL,
-            E: Accidental.FLAT,
-            F: Accidental.NATURAL,
-            G: Accidental.NATURAL,
-            A: Accidental.NATURAL,
-        },
-        E_FLAT: { 
-            order: Accidental.FLAT,
-            E: Accidental.FLAT,
-            F: Accidental.NATURAL,
-            G: Accidental.NATURAL,
-            A: Accidental.FLAT,
-            B: Accidental.FLAT,
-            C: Accidental.NATURAL,
-            D: Accidental.NATURAL,
-        },
-        A_FLAT: { 
-            order: Accidental.FLAT,
-            A: Accidental.FLAT,
-            B: Accidental.FLAT,
-            C: Accidental.NATURAL,
-            D: Accidental.FLAT,
-            E: Accidental.FLAT,
-            F: Accidental.NATURAL,
-            G: Accidental.NATURAL,
-        },
-        D_FLAT: { 
-            order: Accidental.FLAT,
-            D: Accidental.FLAT,
-            E: Accidental.FLAT,
-            F: Accidental.NATURAL,
-            G: Accidental.FLAT,
-            A: Accidental.FLAT,
-            B: Accidental.FLAT,
-            C: Accidental.NATURAL,
-        },
-        G_FLAT: { 
-            order: Accidental.FLAT,
-            G: Accidental.FLAT,
-            A: Accidental.FLAT,
-            B: Accidental.FLAT,
-            C: Accidental.FLAT,
-            D: Accidental.FLAT,
-            E: Accidental.FLAT,
-            F: Accidental.NATURAL,
-        },
-        F_SHARP: { 
-            order: Accidental.SHARP,
-            F: Accidental.SHARP,
-            G: Accidental.SHARP,
-            A: Accidental.SHARP,
-            B: Accidental.NATURAL,
-            C: Accidental.SHARP,
-            D: Accidental.SHARP,
-            E: Accidental.SHARP,
-        },
-        B: { 
-            order: Accidental.SHARP,
-            B: Accidental.NATURAL,
-            C: Accidental.SHARP,
-            D: Accidental.SHARP,
-            E: Accidental.NATURAL,
-            F: Accidental.SHARP,
-            G: Accidental.SHARP,
-            A: Accidental.SHARP,
-        },
-        E: { 
-            order: Accidental.SHARP,
-            E: Accidental.NATURAL,
-            F: Accidental.SHARP,
-            G: Accidental.SHARP,
-            A: Accidental.NATURAL,
-            B: Accidental.NATURAL,
-            C: Accidental.SHARP,
-            D: Accidental.SHARP,
-        },
-        A: { 
-            order: Accidental.SHARP,
-            A: Accidental.NATURAL,
-            B: Accidental.NATURAL,
-            C: Accidental.SHARP,
-            D: Accidental.NATURAL,
-            E: Accidental.NATURAL,
-            F: Accidental.SHARP,
-            G: Accidental.SHARP,
-        },
-        D: { 
-            order: Accidental.SHARP,
-            D: Accidental.NATURAL,
-            E: Accidental.NATURAL,
-            F: Accidental.SHARP,
-            G: Accidental.NATURAL,
-            A: Accidental.NATURAL,
-            B: Accidental.NATURAL,
-            C: Accidental.SHARP,
-        },
-        G: { 
-            order: Accidental.SHARP,
-            G: Accidental.NATURAL,
-            A: Accidental.NATURAL,
-            B: Accidental.NATURAL,
-            C: Accidental.NATURAL,
-            D: Accidental.NATURAL,
-            E: Accidental.NATURAL,
-            F: Accidental.SHARP
-        },
-    };
-
 enum NoteName {
     C,
     D,
@@ -183,27 +48,51 @@ class Note {
         return new Note(NoteName.B, octave, accidental);
     }
 
+    flat(): Note {
+        this.accidental = Accidental.FLAT;
+        return this;
+    }
+
+    sharp(): Note {
+        this.accidental = Accidental.SHARP;
+        return this;
+    }
+
     noteName(): string {
-        return NoteName[this.name];
+        return this.toString(true, false, false);
+    }
+
+    nameAndAccidental(): string {
+        return this.toString(true, false, true);
     }
 
     nameAndOctave(): string {
-        return `${NoteName[this.name]}${this.octave}`;
+        return this.toString(true, true, false);
     }
 
     accidentalToString(): string {
-        switch (this.accidental) {
-            case Music.Accidental.NATURAL:
-                return '\u266E';
-            case Music.Accidental.SHARP:
-                return '\u266F';
-            case Music.Accidental.FLAT:
-                return '\u266d';
-        }
+        return this.toString(false, false, true);
     }
 
-    toString(): string {
-        return `${this.noteName()}${this.octave}${this.accidentalToString()}`;
+    toString(includeNoteName: boolean = true, includeOctave: boolean = true,
+     includeAccidental: boolean = true): string {
+        let name = includeNoteName ? NoteName[this.name] : '';
+        let octave = includeOctave ? this.octave : '';
+        let accidental = '';
+        if (includeAccidental) {
+            switch (this.accidental) {
+                case Accidental.NATURAL:
+                    accidental = '\u266E';
+                    break;
+                case Accidental.SHARP:
+                    accidental = '\u266F';
+                    break;
+                case Accidental.FLAT:
+                    accidental = '\u266d';
+                    break;
+            }
+        }
+        return `${name}${octave}${accidental}`;
     }
 }
 
@@ -217,6 +106,143 @@ var Note5Position = {
     [Note.A(5).nameAndOctave()]: 24,
     [Note.B(5).nameAndOctave()]: 23,
 }
+
+var COF = {
+        [Accidental.SHARP]: [Note.F(), Note.C(), Note.G(), Note.D(),
+                             Note.A(4), Note.E(), Note.B(4)],
+        [Accidental.FLAT]: [Note.B(4), Note.E(), Note.A(4), Note.D(),
+                             Note.G(4), Note.C(), Note.F()],
+        [Note.C().nameAndAccidental()]: {
+            order: Accidental.SHARP,
+            C: Accidental.NATURAL,
+            D: Accidental.NATURAL,
+            E: Accidental.NATURAL,
+            F: Accidental.NATURAL,
+            G: Accidental.NATURAL, 
+            A: Accidental.NATURAL,
+            B: Accidental.NATURAL,
+        },
+        [Note.F().nameAndAccidental()]: {
+            order: Accidental.FLAT,
+            F: Accidental.NATURAL,
+            G: Accidental.NATURAL,
+            A: Accidental.NATURAL,
+            B: Accidental.FLAT,
+            C: Accidental.NATURAL,
+            D: Accidental.NATURAL,
+            E: Accidental.NATURAL,
+        },
+        [Note.B().flat().nameAndAccidental()]: {
+            order: Accidental.FLAT,
+            B: Accidental.FLAT,
+            C: Accidental.NATURAL,
+            D: Accidental.NATURAL,
+            E: Accidental.FLAT,
+            F: Accidental.NATURAL,
+            G: Accidental.NATURAL,
+            A: Accidental.NATURAL,
+        },
+        [Note.E().flat().nameAndAccidental()]: { 
+            order: Accidental.FLAT,
+            E: Accidental.FLAT,
+            F: Accidental.NATURAL,
+            G: Accidental.NATURAL,
+            A: Accidental.FLAT,
+            B: Accidental.FLAT,
+            C: Accidental.NATURAL,
+            D: Accidental.NATURAL,
+        },
+        [Note.A().flat().nameAndAccidental()]: { 
+            order: Accidental.FLAT,
+            A: Accidental.FLAT,
+            B: Accidental.FLAT,
+            C: Accidental.NATURAL,
+            D: Accidental.FLAT,
+            E: Accidental.FLAT,
+            F: Accidental.NATURAL,
+            G: Accidental.NATURAL,
+        },
+        [Note.D().flat().nameAndAccidental()]: { 
+            order: Accidental.FLAT,
+            D: Accidental.FLAT,
+            E: Accidental.FLAT,
+            F: Accidental.NATURAL,
+            G: Accidental.FLAT,
+            A: Accidental.FLAT,
+            B: Accidental.FLAT,
+            C: Accidental.NATURAL,
+        },
+        [Note.G().flat().nameAndAccidental()]: { 
+            order: Accidental.FLAT,
+            G: Accidental.FLAT,
+            A: Accidental.FLAT,
+            B: Accidental.FLAT,
+            C: Accidental.FLAT,
+            D: Accidental.FLAT,
+            E: Accidental.FLAT,
+            F: Accidental.NATURAL,
+        },
+        [Note.F().sharp().nameAndAccidental()]: { 
+            order: Accidental.SHARP,
+            F: Accidental.SHARP,
+            G: Accidental.SHARP,
+            A: Accidental.SHARP,
+            B: Accidental.NATURAL,
+            C: Accidental.SHARP,
+            D: Accidental.SHARP,
+            E: Accidental.SHARP,
+        },
+        [Note.B().nameAndAccidental()]: { 
+            order: Accidental.SHARP,
+            B: Accidental.NATURAL,
+            C: Accidental.SHARP,
+            D: Accidental.SHARP,
+            E: Accidental.NATURAL,
+            F: Accidental.SHARP,
+            G: Accidental.SHARP,
+            A: Accidental.SHARP,
+        },
+        [Note.E().nameAndAccidental()]: { 
+            order: Accidental.SHARP,
+            E: Accidental.NATURAL,
+            F: Accidental.SHARP,
+            G: Accidental.SHARP,
+            A: Accidental.NATURAL,
+            B: Accidental.NATURAL,
+            C: Accidental.SHARP,
+            D: Accidental.SHARP,
+        },
+        [Note.A().nameAndAccidental()]: { 
+            order: Accidental.SHARP,
+            A: Accidental.NATURAL,
+            B: Accidental.NATURAL,
+            C: Accidental.SHARP,
+            D: Accidental.NATURAL,
+            E: Accidental.NATURAL,
+            F: Accidental.SHARP,
+            G: Accidental.SHARP,
+        },
+        [Note.D().nameAndAccidental()]: { 
+            order: Accidental.SHARP,
+            D: Accidental.NATURAL,
+            E: Accidental.NATURAL,
+            F: Accidental.SHARP,
+            G: Accidental.NATURAL,
+            A: Accidental.NATURAL,
+            B: Accidental.NATURAL,
+            C: Accidental.SHARP,
+        },
+        [Note.G().nameAndAccidental()]: { 
+            order: Accidental.SHARP,
+            G: Accidental.NATURAL,
+            A: Accidental.NATURAL,
+            B: Accidental.NATURAL,
+            C: Accidental.NATURAL,
+            D: Accidental.NATURAL,
+            E: Accidental.NATURAL,
+            F: Accidental.SHARP
+        },
+    };
 
 var Music = {
     Accidental: Accidental,

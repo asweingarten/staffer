@@ -29,9 +29,9 @@ class StafferApp {
   
   constructor() {
     this.staff = Staffer;
+    this.staff.key = Music.COF[Music.Note.C().noteName()];
     this.staff.init(new fabric.Canvas('staff'), null, null);
     this.staff.draw();
-    this.staff.setKey(Music.Note.C());
   }
 
   setKey(key: string) {

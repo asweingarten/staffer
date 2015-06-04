@@ -1,6 +1,7 @@
 /// ts:import=music,Music
 import Music = require('./music'); ///ts:import:generated
 var Note = Music.Note;
+var NoteName = Music.NoteName;
 /// <reference path="../typings/fabricjs/fabricjs.d.ts" />
 
 var Staffer = {
@@ -27,22 +28,22 @@ var Staffer = {
     ],
     keySignatureOffsets: {
         [Music.Accidental.SHARP]: {
-            F: 7,
-            G: 6,
-            A: 12,
-            B: 11,
-            C: 10,
-            D: 9,
-            E: 8,
+            [Note.F(5).toString()]: 25,
+            [Note.G(5).toString()]: 24,
+            [Note.A(4).toString()]: 30,
+            [Note.B(4).toString()]: 29,
+            [Note.C(5).toString()]: 28,
+            [Note.D(5).toString()]: 27,
+            [Note.E(5).toString()]: 26,
         },
         [Music.Accidental.FLAT]: {
-            F: 7,
-            G: 13,
-            A: 12,
-            B: 11,
-            C: 10,
-            D: 9,
-            E: 8,
+            [Note.F(5).toString()]: 25,
+            [Note.G(4).toString()]: 31,
+            [Note.A(4).toString()]: 30,
+            [Note.B(4).toString()]: 29,
+            [Note.C(5).toString()]: 28,
+            [Note.D(5).toString()]: 27,
+            [Note.E(5).toString()]: 26,
         },
         OCTAVE: 7
     },
@@ -50,12 +51,12 @@ var Staffer = {
     init(canvas, notes, key) {
         this.canvas = canvas;
         this.notes = notes || null;
-        this.key = key || Music.COF.C;
-        this.canvas.setDimensions({ width: 900, height: 400 });
+        this.key = key;
+        this.canvas.setDimensions({ width: 900, height: 720 });
 
-        this.lineHeight = this.canvas.getHeight() / 20;
+        this.lineHeight = this.canvas.getHeight() / 36;
         for (var i = 0; i < 5; i++) {
-            var height = ((i + 4) * this.lineHeight);
+            var height = (26 * this.lineHeight / 2) + i * this.lineHeight;
             this.lines[i] = new fabric.Line([0, height, this.canvas.getWidth(), height], {
                 stroke: 'black',
                 selectable: false
@@ -64,7 +65,7 @@ var Staffer = {
     },
 
     setKey(note: any) {
-        this.key = Music.COF[note.noteName()];
+        this.key = Music.COF[note.nameAndAccidental()];
         this.draw();
     },
 
@@ -72,12 +73,11 @@ var Staffer = {
         if (this.key !== null) {
             const SHARP_SIGN = '\u266F',
                   FLAT_SIGN = '\u266D';
-            let draw = '';
+            let draw = ''; 
 
             for (var i = 0; i < Music.COF[this.key.order].length; i++) {
-                console.log('printing note: ' + Music.COF[this.key.order][i]);
                 var note = Music.COF[this.key.order][i];
-                switch (this.key[note]) {
+                switch (this.key[note.noteName()]) {
                     case Music.Accidental.NATURAL:
                         draw = '';
                         break;
@@ -88,10 +88,12 @@ var Staffer = {
                         draw = FLAT_SIGN;
                         break;
                 }
-                let noteWidth = 30;
-                let gutter = 20;
+                let noteWidth: number = 30;
+                let gutter: number = 20;
+                let noteTop = (this.lineHeight / 2) * (this.keySignatureOffsets[this.key.order][note.toString()]) - 13;
                 this.canvas.add(new fabric.Text(draw, {
-                    left: noteWidth * i + gutter, top: (this.lineHeight / 2) * (this.keySignatureOffsets[this.key.order][note]) - 13,
+                    left: noteWidth * i + gutter,
+                    top:  noteTop,
                     width: noteWidth, height: 30,
                 }));
             }

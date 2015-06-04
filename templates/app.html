@@ -1,5 +1,5 @@
 <div style="height: 50px;">
 	<div style="float: left;" *for="#key of staff.keySignatures">
-		<button (click)="setKey(key.noteName())">{{key}}</button>
+		<button (click)="setKey(key)">{{key.toString()}}</button>
 	</div>
 </div>
