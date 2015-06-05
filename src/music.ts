@@ -95,14 +95,3 @@ export class Note {
         return `${name}${octave}${accidental}`;
     }
 }
-
-// 0 is C9
-var Note5Position = {
-    [Note.C(5).nameAndOctave()]: 29,
-    [Note.D(5).nameAndOctave()]: 28,
-    [Note.E(5).nameAndOctave()]: 27,
-    [Note.F(5).nameAndOctave()]: 26,
-    [Note.G(5).nameAndOctave()]: 25,
-    [Note.A(5).nameAndOctave()]: 24,
-    [Note.B(5).nameAndOctave()]: 23,
-}
