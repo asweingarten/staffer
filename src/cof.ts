@@ -1,7 +1,5 @@
-/// ts:import=music,Music
-import Music = require('./music'); ///ts:import:generated
-var Accidental = Music.Accidental,
-    Note = Music.Note;
+import {Accidental, Note} from 'music'; ///ts:import:generated
+
 var COF = {
     [Accidental.SHARP]: [Note.F(), Note.C(), Note.G(), Note.D(),
         Note.A(4), Note.E(), Note.B(4)],

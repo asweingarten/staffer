@@ -1,35 +1,11 @@
-/// ts:import=music,Music
-import Music = require('./music'); ///ts:import:generated
+/// <reference path="../typings/fabricjs/fabricjs.d.ts" />
+import {Note, Accidental, NoteName} from 'music'; ///ts:import:generated
 /// ts:import=cof,COF
 import COF = require('./cof'); ///ts:import:generated
-var Note = Music.Note;
-var NoteName = Music.NoteName;
-/// <reference path="../typings/fabricjs/fabricjs.d.ts" />
 
-var Staffer = {
-    notes: null,
-    key: null,
-    lines: [],
-    lineHeight: 0,
-    noteCount: 0,
-    canvas: null,
-    keySignatures: [
-        Note.C(5, Music.Accidental.NATURAL),
-        Note.F(5, Music.Accidental.NATURAL),
-        Note.B(5, Music.Accidental.FLAT),
-        Note.E(5, Music.Accidental.FLAT),
-        Note.A(5, Music.Accidental.FLAT),
-        Note.D(5, Music.Accidental.FLAT),
-        Note.G(5, Music.Accidental.FLAT),
-        Note.F(5, Music.Accidental.SHARP),
-        Note.B(5, Music.Accidental.NATURAL),
-        Note.E(5, Music.Accidental.NATURAL),
-        Note.A(5, Music.Accidental.NATURAL),
-        Note.D(5, Music.Accidental.NATURAL),
-        Note.G(5, Music.Accidental.NATURAL)
-    ],
+var NoteOffsetter = {
     keySignatureOffsets: {
-        [Music.Accidental.SHARP]: {
+        [Accidental.SHARP]: {
             [Note.F(5).toString()]: 25,
             [Note.G(5).toString()]: 24,
             [Note.A(4).toString()]: 30,
@@ -38,7 +14,7 @@ var Staffer = {
             [Note.D(5).toString()]: 27,
             [Note.E(5).toString()]: 26,
         },
-        [Music.Accidental.FLAT]: {
+        [Accidental.FLAT]: {
             [Note.F(5).toString()]: 25,
             [Note.G(4).toString()]: 31,
             [Note.A(4).toString()]: 30,
@@ -49,6 +25,33 @@ var Staffer = {
         },
         OCTAVE: 7
     },
+    getNoteOffset(note: ) {
+
+    }
+}
+
+var Staffer = {
+    notes: null,
+    key: null,
+    lines: [],
+    lineHeight: 0,
+    noteCount: 0,
+    canvas: null,
+    keySignatures: [
+        Note.C(5, Accidental.NATURAL),
+        Note.F(5, Accidental.NATURAL),
+        Note.B(5, Accidental.FLAT),
+        Note.E(5, Accidental.FLAT),
+        Note.A(5, Accidental.FLAT),
+        Note.D(5, Accidental.FLAT),
+        Note.G(5, Accidental.FLAT),
+        Note.F(5, Accidental.SHARP),
+        Note.B(5, Accidental.NATURAL),
+        Note.E(5, Accidental.NATURAL),
+        Note.A(5, Accidental.NATURAL),
+        Note.D(5, Accidental.NATURAL),
+        Note.G(5, Accidental.NATURAL)
+    ],
 
     init(canvas, notes, key) {
         this.canvas = canvas;
@@ -80,19 +83,19 @@ var Staffer = {
             for (var i = 0; i < COF[this.key.order].length; i++) {
                 var note = COF[this.key.order][i];
                 switch (this.key[note.noteName()]) {
-                    case Music.Accidental.NATURAL:
+                    case Accidental.NATURAL:
                         draw = '';
                         break;
-                    case Music.Accidental.SHARP:
+                    case Accidental.SHARP:
                         draw = SHARP_SIGN;
                         break;
-                    case Music.Accidental.FLAT:
+                    case Accidental.FLAT:
                         draw = FLAT_SIGN;
                         break;
                 }
                 let noteWidth: number = 30;
                 let gutter: number = 20;
-                let noteTop = (this.lineHeight / 2) * (this.keySignatureOffsets[this.key.order][note.toString()]) - 13;
+                let noteTop = (this.lineHeight / 2) * (NoteOffsetter.keySignatureOffsets[this.key.order][note.toString()]) - 13;
                 this.canvas.add(new fabric.Text(draw, {
                     left: noteWidth * i + gutter,
                     top:  noteTop,
@@ -110,9 +113,9 @@ var Staffer = {
                 let gutter = 20;
                 let note = this.notes[i];
                 let noteHeight = note.position;
-                // this.canvas.add(new fabric.Ellipse({rx: noteWidth/2, ry: this.lineHeight/2,
-                //                                     left: noteWidth*i+gutter, top: 100,
-                //                                     fill: 'black'}));
+                this.canvas.add(new fabric.Ellipse({rx: noteWidth/2, ry: this.lineHeight/2,
+                                                    left: noteWidth*i+gutter, top: 100,
+                                                    fill: 'black'}));
             }
         }
     },

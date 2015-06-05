@@ -1,10 +1,10 @@
-enum Accidental {
+export enum Accidental {
         NATURAL,
         SHARP,
         FLAT
 };
 
-enum NoteName {
+export enum NoteName {
     C,
     D,
     E,
@@ -14,7 +14,7 @@ enum NoteName {
     B,
 };
 
-class Note {
+export class Note {
     name: any;
     octave: number;
     accidental: Accidental;
@@ -106,13 +106,3 @@ var Note5Position = {
     [Note.A(5).nameAndOctave()]: 24,
     [Note.B(5).nameAndOctave()]: 23,
 }
-
-
-
-var Music = {
-    Accidental: Accidental,
-    Note: Note,
-    NoteName: NoteName,
-    Note5Position: Note5Position
-}
-export = Music;
