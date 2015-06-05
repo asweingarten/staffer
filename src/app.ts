@@ -31,7 +31,9 @@ class StafferApp {
   constructor() {
     this.staff = Staffer;
     this.staff.key = COF[Note.C().noteName()];
-    this.staff.init(new fabric.Canvas('staff'), null, null);
+    this.staff.init(new fabric.Canvas('staff'),
+     [Note.C(), Note.D(), Note.E(), Note.F(), Note.G(), Note.A(), Note.B(), Note.C(6)],
+     null);
     this.staff.draw();
   }
 

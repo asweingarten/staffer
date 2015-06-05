@@ -26,18 +26,17 @@ var NoteOffsetter = {
             [Note.D(5).toString()]: 27,
             [Note.E(5).toString()]: 26,
         },
-        OCTAVE: 7
     },
 
     // 0 is C9
     note5Position: {
-        [Note.C(5).noteName()]: 29,
-        [Note.D(5).noteName()]: 28,
-        [Note.E(5).noteName()]: 27,
-        [Note.F(5).noteName()]: 26,
-        [Note.G(5).noteName()]: 25,
-        [Note.A(5).noteName()]: 24,
-        [Note.B(5).noteName()]: 23,
+        [Note.C(5).noteName()]: 28,
+        [Note.D(5).noteName()]: 27,
+        [Note.E(5).noteName()]: 26,
+        [Note.F(5).noteName()]: 25,
+        [Note.G(5).noteName()]: 24,
+        [Note.A(5).noteName()]: 23,
+        [Note.B(5).noteName()]: 22,
     },
 
     getKeySignatureOffset(note: Note, order: Accidental) {
@@ -45,7 +44,7 @@ var NoteOffsetter = {
     },
     getNoteOffset(note: Note): number {
         const OCTAVE_OFFSET = 7;
-        let offset = (note.octave - 5)*OCTAVE_OFFSET;
+        let offset = (5 - note.octave)*OCTAVE_OFFSET;
         return this.note5Position[note.noteName()] + offset;
     }
 }
@@ -128,12 +127,13 @@ var Staffer = {
         if (this.notes === null) return;
 
         for(var i = 0; i < this.notes.length; i++) {
-            let noteWidth = this.canvas.getWidth()/this.notes.length/2;
-            let gutter = 200;
+            let noteWidth = this.lineHeight*1.5;
+            let offset = 250;
+            let gutter = noteWidth * 1.25;
             let note = this.notes[i];
             let noteOffset = NoteOffsetter.getNoteOffset(note);
             this.canvas.add(new fabric.Ellipse({rx: noteWidth/2, ry: this.lineHeight/2,
-                                                left: gutter, top: this.lineHeight/2*noteOffset,
+                                                left: offset+i*gutter, top: this.lineHeight/2*noteOffset,
                                                 fill: 'black'}));
         }
     },
@@ -152,7 +152,7 @@ var Staffer = {
         }
 
         this.drawKeySignature();
-        // this.drawNotes();
+        this.drawNotes();
 
     }
 
