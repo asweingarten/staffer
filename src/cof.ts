@@ -1,4 +1,4 @@
-import {Accidental, Note} from 'music'; ///ts:import:generated
+import {Accidental, Note} from './music';
 
 var COF = {
     [Accidental.SHARP]: [Note.F(), Note.C(), Note.G(), Note.D(),

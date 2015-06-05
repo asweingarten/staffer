@@ -6,8 +6,7 @@ import {Component, View, bootstrap, For, If} from 'angular2/angular2';
 /// ts:import=staffer,Staffer
 import Staffer = require('./staffer'); ///ts:import:generated
 
-/// ts:import=music,Music
-import Music = require('./music'); ///ts:import:generated
+import {Note} from './music';
 /// ts:import=cof,COF
 import COF = require('./cof'); ///ts:import:generated
 
@@ -31,7 +30,7 @@ class StafferApp {
   
   constructor() {
     this.staff = Staffer;
-    this.staff.key = COF[Music.Note.C().noteName()];
+    this.staff.key = COF[Note.C().noteName()];
     this.staff.init(new fabric.Canvas('staff'), null, null);
     this.staff.draw();
   }

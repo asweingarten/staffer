@@ -1,5 +1,5 @@
 /// <reference path="../typings/fabricjs/fabricjs.d.ts" />
-import {Note, Accidental, NoteName} from 'music'; ///ts:import:generated
+import {Accidental, Note, NoteName} from './music';
 /// ts:import=cof,COF
 import COF = require('./cof'); ///ts:import:generated
 
@@ -25,8 +25,11 @@ var NoteOffsetter = {
         },
         OCTAVE: 7
     },
-    getNoteOffset(note: ) {
-
+    getKeySignatureOffset(note: Note, order: Accidental) {
+        return this.keySignatureOffsets[order][note.toString()];
+    },
+    getNoteOffset(note: Note): number {
+        return 0;
     }
 }
 
@@ -69,7 +72,7 @@ var Staffer = {
         }
     },
 
-    setKey(note: any) {
+    setKey(note: Note) {
         this.key = COF[note.nameAndAccidental()];
         this.draw();
     },
@@ -95,7 +98,7 @@ var Staffer = {
                 }
                 let noteWidth: number = 30;
                 let gutter: number = 20;
-                let noteTop = (this.lineHeight / 2) * (NoteOffsetter.keySignatureOffsets[this.key.order][note.toString()]) - 13;
+                let noteTop = (this.lineHeight / 2) * NoteOffsetter.getKeySignatureOffset(note, this.key.order) - 13;
                 this.canvas.add(new fabric.Text(draw, {
                     left: noteWidth * i + gutter,
                     top:  noteTop,
