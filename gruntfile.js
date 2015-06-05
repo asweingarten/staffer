@@ -12,6 +12,7 @@ module.exports = function(grunt) {
 			},
 			src: ["src/*.ts", "!node_modules/**/*.ts", "!ts-1.5.0beta/**/*.ts"],
 			outDir: 'dist',
+			watch: 'src'
 		}
     }
   });
