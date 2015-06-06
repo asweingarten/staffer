@@ -90,6 +90,7 @@ var Staffer = {
 
     setKey(note: Note) {
         this.key = COF[note.nameAndAccidental()];
+        this.notes = this.key.notes;
         this.draw();
     },
 

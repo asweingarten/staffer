@@ -10,6 +10,8 @@ var COF = {
         Note.G(4), Note.C(), Note.F()],
     [Note.C().nameAndAccidental()]: {
         order: SHARP,
+        notes: [Note.C(), Note.D(), Note.E(), Note.F(), Note.G(),
+            Note.A(), Note.B(), Note.C(6)],
         C: NATURAL,
         D: NATURAL,
         E: NATURAL,
@@ -20,6 +22,8 @@ var COF = {
     },
     [Note.F().nameAndAccidental()]: {
         order: FLAT,
+        notes: [Note.F(4), Note.G(4), Note.A(4), Note.B(4, FLAT), Note.C(),
+            Note.D(), Note.E(), Note.F()],
         F: NATURAL,
         G: NATURAL,
         A: NATURAL,
@@ -30,6 +34,8 @@ var COF = {
     },
     [Note.B(5, FLAT).nameAndAccidental()]: {
         order: FLAT,
+        notes: [Note.B(4, FLAT), Note.C(), Note.D(), Note.E(5, FLAT),
+            Note.F(), Note.G(), Note.A(), Note.B().flat()],
         B: FLAT,
         C: NATURAL,
         D: NATURAL,
@@ -40,6 +46,8 @@ var COF = {
     },
     [Note.E(5, FLAT).nameAndAccidental()]: {
         order: FLAT,
+        notes: [Note.E(4, FLAT), Note.F(4), Note.G(4), Note.A(4, FLAT),
+            Note.B(4, FLAT), Note.C(), Note.D(), Note.E(5, FLAT)],
         E: FLAT,
         F: NATURAL,
         G: NATURAL,
@@ -50,6 +58,8 @@ var COF = {
     },
     [Note.A(5, FLAT).nameAndAccidental()]: {
         order: FLAT,
+        notes: [Note.A(4, FLAT), Note.B(4, FLAT), Note.C(), Note.D(5, FLAT),
+            Note.E(5, FLAT), Note.F(), Note.G(), Note.A(5, FLAT)],
         A: FLAT,
         B: FLAT,
         C: NATURAL,
@@ -60,6 +70,8 @@ var COF = {
     },
     [Note.D(5, FLAT).nameAndAccidental()]: {
         order: FLAT,
+        notes: [Note.D(4, FLAT), Note.E(4, FLAT), Note.F(4, FLAT), Note.G(4, FLAT),
+            Note.A(4, FLAT), Note.B(4, FLAT), Note.C(), Note.D(5, FLAT)],
         D: FLAT,
         E: FLAT,
         F: NATURAL,
@@ -70,6 +82,9 @@ var COF = {
     },
     [Note.G(5, FLAT).nameAndAccidental()]: {
         order: FLAT,
+        notes: [Note.G(4, FLAT), Note.A(4, FLAT), Note.B(4, FLAT),
+            Note.C(5, FLAT), Note.D(5, FLAT), Note.E(5, FLAT),
+            Note.F(), Note.G(5, FLAT)],
         G: FLAT,
         A: FLAT,
         B: FLAT,
@@ -80,6 +95,8 @@ var COF = {
     },
     [Note.F(5, SHARP).nameAndAccidental()]: {
         order: SHARP,
+        notes: [Note.F(4, SHARP), Note.G(4, SHARP), Note.A(4, SHARP), Note.B(4, NATURAL),
+            Note.C(5, SHARP), Note.D(5, SHARP), Note.E(5, SHARP), Note.F(5, SHARP)],
         F: SHARP,
         G: SHARP,
         A: SHARP,
@@ -90,6 +107,8 @@ var COF = {
     },
     [Note.B().nameAndAccidental()]: {
         order: SHARP,
+        notes: [Note.B(4), Note.C(5, SHARP), Note.D(5, SHARP), Note.E(),
+            Note.F(5, SHARP), Note.G(5, SHARP), Note.A(5, SHARP), Note.B()],
         B: NATURAL,
         C: SHARP,
         D: SHARP,
@@ -100,6 +119,8 @@ var COF = {
     },
     [Note.E().nameAndAccidental()]: {
         order: SHARP,
+        notes: [Note.E(4), Note.F(4, SHARP), Note.G(4, SHARP),
+            Note.A(4), Note.B(4), Note.C(5, SHARP), Note.D(5, SHARP), Note.E()],
         E: NATURAL,
         F: SHARP,
         G: SHARP,
@@ -110,6 +131,8 @@ var COF = {
     },
     [Note.A().nameAndAccidental()]: {
         order: SHARP,
+        notes: [Note.A(4), Note.B(4), Note.C(5, SHARP), Note.D(),
+            Note.E(), Note.F(5, SHARP), Note.G(5, SHARP), Note.A()],
         A: NATURAL,
         B: NATURAL,
         C: SHARP,
@@ -120,6 +143,8 @@ var COF = {
     },
     [Note.D().nameAndAccidental()]: {
         order: SHARP,
+        notes: [Note.D(4), Note.E(4), Note.F(4, SHARP), Note.G(4),
+            Note.A(4), Note.B(4), Note.C(5, SHARP), Note.D()],
         D: NATURAL,
         E: NATURAL,
         F: SHARP,
@@ -130,6 +155,8 @@ var COF = {
     },
     [Note.G().nameAndAccidental()]: {
         order: SHARP,
+        notes: [Note.G(4), Note.A(4), Note.B(4), Note.C(), Note.D(),
+            Note.E(), Note.F(5, SHARP), Note.G()],
         G: NATURAL,
         A: NATURAL,
         B: NATURAL,
