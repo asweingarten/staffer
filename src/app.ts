@@ -42,6 +42,15 @@ class StafferApp {
       this.activeKey = key;
   }
 
+  raiseOctave() {
+    console.log('hey');
+    this.staff.transpose(1);
+  }
+
+  lowerOctave() {
+    this.staff.transpose(-1);
+  }
+
 }
 
 bootstrap(StafferApp);

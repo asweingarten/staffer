@@ -2,4 +2,8 @@
 	<div style="float: left;" *for="#key of staff.keySignatures">
 		<button (click)="setKey(key)">{{key.toString()}}</button>
 	</div>
+	<div>
+		<button (click)="raiseOctave()">+Octave</button>
+		<button (click)="lowerOctave()">-Octave</button>
+	</div>
 </div>

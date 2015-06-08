@@ -1,4 +1,5 @@
 /// <reference path="../typings/fabricjs/fabricjs.d.ts" />
+/// <reference path="../typings/lodash/lodash.d.ts" />
 import {Accidental, Note, NoteName} from './music';
 /// ts:import=cof,COF
 import COF = require('./cof'); ///ts:import:generated
@@ -135,7 +136,10 @@ var Staffer = {
             let noteOffset = NoteOffsetter.getNoteOffset(note);
             this.canvas.add(new fabric.Ellipse({rx: noteWidth/2, ry: this.lineHeight/2,
                                                 left: offset+i*gutter, top: this.lineHeight/2*noteOffset,
-                                                fill: 'black'}));
+                                                fill: 'black', selectable: false}));
+            this.canvas.add(new fabric.Ellipse({rx: noteWidth/4, ry: this.lineHeight/4,
+                                                left: offset+i*gutter+noteWidth/4, top: this.lineHeight/2*noteOffset+ this.lineHeight/4,
+                                                fill: 'white', selectable: false}).rotate(45));
         }
     },
 
@@ -155,6 +159,13 @@ var Staffer = {
         this.drawKeySignature();
         this.drawNotes();
 
+    },
+
+    transpose(octaves: number) {
+        _.each(this.notes, function(note: Note) {
+            note.setOctave(note.octave + octaves);
+        });
+        this.draw();
     }
 
 };

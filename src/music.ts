@@ -58,6 +58,10 @@ export class Note {
         return this;
     }
 
+    setOctave(octave: number): void {
+        this.octave = octave;
+    }
+
     noteName(): string {
         return this.toString(true, false, false);
     }
