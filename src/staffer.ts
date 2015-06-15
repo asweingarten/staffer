@@ -131,15 +131,63 @@ var Staffer = {
         for(var i = 0; i < this.notes.length; i++) {
             let noteWidth = this.lineHeight*1.5;
             let offset = 250;
-            let gutter = noteWidth * 1.25;
+            let gutter = noteWidth * 1.5;
             let note = this.notes[i];
             let noteOffset = NoteOffsetter.getNoteOffset(note);
+
             this.canvas.add(new fabric.Ellipse({rx: noteWidth/2, ry: this.lineHeight/2,
                                                 left: offset+i*gutter, top: this.lineHeight/2*noteOffset,
                                                 fill: 'black', selectable: false}));
             this.canvas.add(new fabric.Ellipse({rx: noteWidth/4, ry: this.lineHeight/4,
                                                 left: offset+i*gutter+noteWidth/4, top: this.lineHeight/2*noteOffset+ this.lineHeight/4,
                                                 fill: 'white', selectable: false}).rotate(45));
+
+
+            if (noteOffset <= 23) {
+                if (noteOffset % 2 === 1) {
+                    this.canvas.add(new fabric.Line([offset + (i - 0.05) * gutter,
+                        this.lineHeight / 2 * (noteOffset + 2),
+                        offset + (i + 0.75) * gutter,
+                        this.lineHeight / 2 * (noteOffset + 2)],
+                        {
+                            stroke: 'black',
+                            selectable: false
+                        }));
+                        // line below
+                    } else {
+                        this.canvas.add(new fabric.Line([offset + (i - 0.1) * gutter,
+                            this.lineHeight / 2 * (noteOffset + 1),
+                            offset + (i + 0.8) * gutter,
+                            this.lineHeight / 2 * (noteOffset + 1)],
+                            {
+                                stroke: 'black',
+                                selectable: false
+                            }));
+                        // line through
+                    }
+            } else if (noteOffset >= 35) {
+                if (noteOffset % 2 === 1) {
+                    this.canvas.add(new fabric.Line([offset + (i - 0.05) * gutter,
+                        this.lineHeight / 2 * (noteOffset),
+                        offset + (i + 0.75) * gutter,
+                        this.lineHeight / 2 * (noteOffset)],
+                        {
+                            stroke: 'black',
+                            selectable: false
+                        }));
+                    //line above
+                } else {
+                    this.canvas.add(new fabric.Line([offset + (i - 0.1) * gutter,
+                        this.lineHeight / 2 * (noteOffset + 1),
+                        offset + (i + 0.8) * gutter,
+                        this.lineHeight / 2 * (noteOffset + 1)],
+                        {
+                            stroke: 'black',
+                            selectable: false
+                        }));
+                    //line through
+                }
+            }
         }
     },
 
